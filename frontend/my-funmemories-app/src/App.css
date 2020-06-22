@@ -1,0 +1,38 @@
+h1{
+  color: green;
+}
+
+h3{
+  color:blue;
+}
+p{
+  font-style: oblique;
+  color: black;
+}
+body{
+  background-color:rgb(197, 191, 176) !important;
+}
+.navbar {
+  background-color:navy;
+  padding:10px;
+  height:75px;
+  width:100%;
+}
+
+.navbar-brand {
+  color:honeydew !important;
+  font:25px;
+  padding:10px;
+}
+.nav-link{
+  color:gold !important;
+  font:25px;
+  padding:10px;
+}
+.card{
+  background-color:rgb(161, 157, 216) !important;
+  display: "inline-block"!important;
+  margin: 15px 15px 15px 15px;
+  transition:all 1s linear
+}
+
