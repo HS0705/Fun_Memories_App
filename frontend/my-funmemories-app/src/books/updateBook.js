@@ -49,7 +49,7 @@ class UpdateBook extends Component{
                 <Form onSubmit ={this.handleBookUpdate}>
                 <Form.Group controlId="collectionId">
                     <Form.Label>Collection Id: </Form.Label>
-                    <Form.Control readOnly name="collectionId" value={this.state.collectionId} />
+                    <Form.Control hidden name="collectionId" value={this.state.collectionId} />
                 </Form.Group>
                 <Form.Group controlId="titleId">
                     <Form.Label>Title</Form.Label>

@@ -39,7 +39,7 @@ class AddBookSeries extends Component{
             <div className="container-fluid">
                 <Form onSubmit ={this.handleBook}>
                 <Form.Group controlId="collectionId">
-                    <Form.Control  name="collectionId" value={this.props.match.params.id} />
+                    <Form.Control  hidden name="collectionId" value={this.props.match.params.id} />
                 </Form.Group>
                 <Form.Group controlId="titleId">
                     <Form.Label>Title</Form.Label>

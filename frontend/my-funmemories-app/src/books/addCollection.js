@@ -28,6 +28,7 @@ class AddBookCollection extends Component{
         axios.post('http://localhost:5000/bookCollection/addCollection', newBook) 
         .then ((res) =>{
             alert("Collection added to the database!")
+            this.props.history.push('/landing')
         })
         .catch((err) =>{
             console.log(err.res);

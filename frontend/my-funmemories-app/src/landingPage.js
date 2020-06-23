@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import axios from 'axios';
-import {Carousel,Card, Button} from 'react-bootstrap';
+import {Carousel,Card, Button, Jumbotron} from 'react-bootstrap';
 import {Link} from 'react-router-dom';
 
 
@@ -35,31 +35,54 @@ class LandingPage extends Component{
                 console.log(err);
             })   
     }
+    
+    showData(data) {
+        if (data.length==0){
+            return( <div className="container-fluid">
+                <Jumbotron>
+                <p style={{"color":"purple"}}>Hey {this.state.userName}, you dont have any collections .Lets start adding memories !!</p>
+                <Link to ={'/addBookCollection/'+this.state.userId}>Add Collection</Link>
+                </Jumbotron>
+            
+        </div>)
+        }
+        else{
+            return(
+            <div className="container-fluid"> 
+            <p style={{"alignItems":"center"}}>
+            <Link to ={'/addBookCollection/'+this.state.userId}>Add Collection</Link>
+            </p> 
+            <Carousel>
+            {data.map((item, key) => {
+            return(
+                <Carousel.Item key={key} style={{'height':"400px"}}>
+                    <Carousel.Caption>
+                        <Card className="text-center p-3" style={{'height':"300px"}}>
+                            <Card.Title>Series: {item.collectionName}</Card.Title>
+                                <Card.Subtitle>Author: {item.author}</Card.Subtitle>
+                            <Card.Body>
+                                <Card.Text>About: {item.description}</Card.Text>
+                                <Card.Text><Link to ={'/viewBooks/'+item._id}>View Books</Link></Card.Text>
+                            </Card.Body>
+                            <Card.Footer><Link to ={"/addBook/"+ item._id }>Add Book</Link></Card.Footer>
+                        </Card>                       
+                    </Carousel.Caption>
+                </Carousel.Item>
+                ) 
+                }) }   
+            </Carousel>
+            
+            </div>  
+            )}
+    }
     render() {
+        const data = this.state.collections;
         return(
             <div className="container-fluid">
                 <h3>Welcome {this.state.nickName}</h3>
-                <div className="container-fluid">
-                    <Carousel>
-                            {this.state.collections.map((item, key) => {
-                        return(
-                                <Carousel.Item key={key} style={{'height':"500px"}}>
-                                    <Carousel.Caption>
-                                        <Card className="text-center p-3" style={{'height':"300px"}}>
-                                            <Card.Title>Series: {item.collectionName}</Card.Title>
-                                                <Card.Subtitle>Author: {item.author}</Card.Subtitle>
-                                            <Card.Body>
-                                                <Card.Text>About: {item.description}</Card.Text>
-                                                <Card.Text><Link to ={'/viewBooks/'+item._id}>Books</Link></Card.Text>
-                                            </Card.Body>
-                                            <Card.Footer><Link to ={"/addBook/"+ item._id }>AddBook</Link></Card.Footer>
-                                        </Card>                       
-                                    </Carousel.Caption>
-                                </Carousel.Item>
-                                ) 
-                            }) }
-                    </Carousel>
-                </div>
+                    <div className="container-fluid">
+                        {this.showData(data)}
+                    </div>
             </div>
         )
 }
