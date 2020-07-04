@@ -5,6 +5,7 @@ const bodyParser = require('body-parser');
 const cors = require('cors');
 require('dotenv').config();
 const mongoose = require('mongoose');
+// const multer =require('multer');
 const userRoute = express.Router();
 const userCollection = require('./data_model/user');
 const bookCollectionRoute = express.Router();
@@ -22,8 +23,10 @@ const jwt = require('jsonwebtoken');
 const SECRET_KEY =  process.env.SECRET_KEY;
 
 app.use(bodyParser.urlencoded({ extended: true }))
-app.use(bodyParser.json())
+app.use(bodyParser.json({limit:'50mb'}))
 app.use(cors());
+// app.use('/uploads',express.static('uploads'));
+
 app.use('/userCollection',userRoute);
 app.use('/bookCollection', bookCollectionRoute);
 app.use('/bookSeries',bookSeriesRoute);
@@ -37,13 +40,14 @@ dbConnection.once('open', () => {
 
 userRoute.post('/register', ( req,res ) =>{
     userCollection.findOne({
-        userName:req.body.userName
+        email:req.body.email
     }).then ((user) => {
         if (!user) {
             const userInfo = {
                 userName : req.body.userName,
                 password : req.body.password,
                 nickName : req.body.nickName,
+                email:  req.body.email,
                 createdAt: new Date()
             }
             bcrypt.hash(req.body.password, 10, (err,hash)=>{
@@ -58,7 +62,7 @@ userRoute.post('/register', ( req,res ) =>{
                 })
             })
         } else {
-            res.status(400).json({error:' User already exist! Please register with different User Name'})
+            res.status(400).json({error:' Email already exist! Please register with different email'})
         }
     })
 })
@@ -110,16 +114,21 @@ userRoute.post('/register', ( req,res ) =>{
             if(!collection){
                 let newCollection = {
                     userId:req.body.userId,
-                    collectionName:req.body.collectionName,
-                    description:req.body.description,
-                    author:req.body.author,
+                    title:req.body.title.toLowerCase(),
+                    description:req.body.description.toLowerCase(),
+                    author:req.body.author.toLowerCase(),
+                    category:req.body.category.toLowerCase(),
+                    image:req.body.image,
+                    comments:req.body.comments.toLowerCase(),
                     addedDate: new Date()
                     }
                 bookCollection.create(newCollection)
                 .then(newCollection => {
+                    console.log("Success")
                     res.status(200).json({'Collection': newCollection});
                 })
                 .catch(error => {
+                    console.log("Failure")
                     res.status(400).send('Error, cannot add the collection to the database');
                 });
             }
@@ -128,6 +137,7 @@ userRoute.post('/register', ( req,res ) =>{
             }
         })
     .catch(err =>{
+        console.log(err)
         res.send("Error" + err)
     })   
 })
@@ -143,19 +153,25 @@ bookCollectionRoute.get('/series/:id',(req, res)=> {
     
     
 bookSeriesRoute.post('/addBook',(req, res)=> {
-    console.log(req.body)
     bookCollection.findOne({_id:req.body.collectionId})
     .then((collection)=>{
         let newBook = {
             collectionId:req.body.collectionId,
-            title:req.body.title,
+            title:req.body.title.toLowerCase(),
+            giftBy:req.body.giftBy.toLowerCase(),
+            startedReading:req.body.startedReading,
+            finishedReading:req.body.finishedReading,
+            comments:req.body.comments,
+            image:req.body.image,
             addedDate: new Date()
         };
         bookSeries.create(newBook)
         .then(newBook => {
+            console.log(newBook)
             res.status(200).json({'Book': newBook});
         })
         .catch(error => {
+            console.log(error)
             res.status(400).send('Error, cannot add the book to the collection');
         });
     })
@@ -182,10 +198,16 @@ bookSeriesRoute.post('/updateBook/:id',(req,res) => {
         else{
              bookSeries.updateOne({_id:req.params.id},
                 { $set:{
-                    title: req.body.title
+                    title: req.body.title.toLowerCase(),
+                    giftBy:req.body.giftBy.toLowerCase(),
+                    startedReading:req.body.startedReading,
+                    finishedReading:req.body.finishedReading,
+                    comments:req.body.comments,
+                    image:req.body.image,
                 }
                 })
                 .then((book)=>{
+                    console.log(book)
                     res.status(200).json("Successfully Updated the book");
                 })
                 .catch((err)=>{

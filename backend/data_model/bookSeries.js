@@ -10,6 +10,21 @@ let bookSeriesSchema =new Schema({
         type:String,
         required:true
     },
+    giftBy:{
+        type:String
+    },
+    startedReading:{
+        type:Date
+    },
+    finishedReading:{
+        type:Date
+    },
+    comments:{
+        type:String
+    },
+    image:{
+        type:String
+    },
     addedDate:{
         type:Date
     }

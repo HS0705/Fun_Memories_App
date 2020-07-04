@@ -10,7 +10,8 @@ p{
   color: black;
 }
  body{
-  /* background-color:whitesmoke !important; */
+  background-image:none
+  /* url('/images/img4.jpg'); */
   
  }
 .navbar {
@@ -31,12 +32,98 @@ p{
   padding:10px;
 }
 .card{
-  background-color:rgb(241, 241, 247) !important;
   color:navy !important;
-  display: "inline-block"!important;
+  background:lavenderblush !important;
   margin: 10px 10px 10px 10px;
   text-transform: uppercase;
-  border-radius: 1rem !important;
-  border: 1px solid #FFC107 !important;
+  border: 2px solid navy !important;
+}
+.react-card-flipper{
+  height:350px !important;
+  width:300px !important;
+  position: absolute;
+  color:green !important;
 }
 
+.login-container{
+  position: absolute;
+  left:35%;
+  width:300px;
+  font-family: 'Roboto', sans-serif !important;
+  border: 1px solid navy !important;
+  margin:5rem 5rem 5rem 5rem;
+  padding:1rem 1rem 1rem 1rem;
+  border-radius:25px !important;
+  background-color:lavenderblush;
+}
+.register-container{
+  position: absolute;
+  left:35%;
+  width:300px;
+  font-family: 'Roboto', sans-serif !important;
+  border: 1px solid navy !important;
+  margin: 5rem 5rem 5rem 5rem;
+  padding:1rem 1rem 1rem 1rem;
+  border-radius:25px !important;
+  background-color:lavenderblush;
+}
+.form{
+  position: absolute;
+  left:35%;
+  width:300px;
+  font-family: 'Roboto', sans-serif !important;
+  border: 1px solid navy !important;
+  margin: 5rem 5rem 5rem 5rem;
+  padding:1rem 1rem 1rem 1rem;
+  border-radius:25px !important;
+  background-color:lavenderblush;
+}
+.btn-2 {
+  color: #fff;
+  background-color:green !important;
+  border-color: #6c757d;
+  opacity: 0.6;
+  transition: 0.3s;
+  text-align: center;
+  border-radius:25px !important;
+}
+.btn-2:hover{
+  opacity: 2;
+}
+.btn-1 {
+  color: #fff;
+  background-color:green !important;
+  border-color: #6c757d;
+  opacity: 0.6;
+  transition: 0.3s;
+  text-align: center;
+  border-radius:25px !important;
+}
+.btn-1:hover{
+  opacity: 2;
+}
+.btn-3 {
+  color: #fff;
+  background-color:red !important;
+  border-color: #6c757d;
+  opacity: 0.6;
+  transition: 0.3s;
+  text-align: center;
+  border-radius:25px !important;
+}
+.btn-3:hover{
+  opacity: 2;
+}
+
+.searchBox{
+  background-color:lavenderblush;
+  width:350px !important;
+  border: 2px solid navy;
+  border-radius:12px !important;
+}
+
+.jumbotron{
+  background-color:lavenderblush !important;
+  border: 2px solid navy;
+  border-radius:12px !important;
+}

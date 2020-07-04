@@ -16,6 +16,10 @@ let userSchema = new Schema({
         required: true
 
     },
+    email: {
+        type:String, 
+        required: true
+    },
     createdAt:{
         type:Date
     }

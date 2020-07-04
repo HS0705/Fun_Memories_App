@@ -6,7 +6,7 @@ let bookCollectionSchema = new Schema({
         type:String,
         required:true
     },
-    collectionName : { 
+    title : { 
         type:String,
         required:true
     },
@@ -14,6 +14,15 @@ let bookCollectionSchema = new Schema({
         type:String
     },
     author:{
+        type:String
+    },
+    category:{
+        type:String
+    },
+    image:{
+        type: String
+    },
+    comments:{
         type:String
     },
     addedDate:{
