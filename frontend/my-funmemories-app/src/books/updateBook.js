@@ -73,8 +73,8 @@ class UpdateBook extends Component{
     
     render() {
         return(
-            <div className="container-fluid" style={{width:"300px"}}>
-                <Form onSubmit ={this.handleBookUpdate}>
+            <div>
+                <Form className="form-cl" onSubmit ={this.handleBookUpdate}>
                 <Form.Group controlId="titleId">
                     <Form.Label>Title</Form.Label>
                     <Form.Control  type="text" name="title"  value={this.state.title} onChange={this.onChange} />

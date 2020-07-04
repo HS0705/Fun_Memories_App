@@ -67,14 +67,14 @@ p{
   border-radius:25px !important;
   background-color:lavenderblush;
 }
-.form{
-  position: absolute;
-  left:35%;
-  width:300px;
+.form-cl{
+  position: relative;
+  left:25% ; 
+  width:500px;
   font-family: 'Roboto', sans-serif !important;
   border: 1px solid navy !important;
   margin: 5rem 5rem 5rem 5rem;
-  padding:1rem 1rem 1rem 1rem;
+  padding:3rem 3rem 3rem 3rem;
   border-radius:25px !important;
   background-color:lavenderblush;
 }

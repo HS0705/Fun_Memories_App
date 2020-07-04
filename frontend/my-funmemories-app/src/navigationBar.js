@@ -20,7 +20,7 @@ class NavigationBar extends Component{
         )
         const userSignedIn =(
             <Nav className="ml-auto">
-                <Nav.Link href="/landing">Profile</Nav.Link> 
+                <Nav.Link href="/landing">Dashboard</Nav.Link> 
                 <Nav.Link href="/logout" onClick ={this.userlogout.bind(this)}>Logout</Nav.Link>
             </Nav>
         )

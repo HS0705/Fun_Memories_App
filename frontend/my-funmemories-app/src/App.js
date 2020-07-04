@@ -11,7 +11,7 @@ import AddBookCollection from './books/addCollection';
 import AddBookSeries from './books/addBook';
 import ViewBooks from './books/viewBooks';
 import UpdateBook from './books/updateBook';
-import Search from './search';
+
 class App extends Component {
 
   render(){
@@ -22,7 +22,6 @@ class App extends Component {
         <Route path="/login" component={LoginPage} />
         <Route path="/register" component={RegisterPage} />
         <Route path="/landing" component={LandingPage} />
-        <Route path="/search" component={Search} />
         <Route path="/addBookCollection/:id" component={AddBookCollection} />
         <Route path="/addBook/:id" component={AddBookSeries} />
         <Route path="/viewBooks/:id" component={ViewBooks} />

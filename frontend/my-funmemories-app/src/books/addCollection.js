@@ -58,8 +58,8 @@ class AddBookCollection extends Component{
     }
     render() {
         return(
-            <div className="container-fluid">
-                <Form onSubmit ={this.handleCollection}>
+            <div>
+                <Form className="form-cl" onSubmit ={this.handleCollection}>
                 <Form.Group controlId="loginUserId">
                     <Form.Control hidden name="userId" defaultValue={this.props.match.params.id} />
                 </Form.Group>

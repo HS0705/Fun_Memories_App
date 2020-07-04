@@ -67,8 +67,8 @@ class AddBookSeries extends Component{
     render() {
         
         return(
-            <div className="container-fluid">
-                <Form onSubmit ={this.handleBook}>
+            <div>
+                <Form className="form-cl" onSubmit ={this.handleBook}>
                 <Form.Group controlId="titleId">
                     <Form.Label>Title</Form.Label>
                     <Form.Control  type="text" name="title" placeholder="Enter the title " value={this.state.title} onChange={this.onChange} />
