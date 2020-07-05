@@ -27,7 +27,8 @@ p{
   padding:10px;
 }
 .nav-link{
-  color:gold !important;
+  color:honeydew
+   !important;
   font:25px;
   padding:10px;
 }
@@ -37,12 +38,18 @@ p{
   margin: 10px 10px 10px 10px;
   text-transform: uppercase;
   border: 2px solid navy !important;
+  height:400px !important;
+  width:300px !important;
+  text-align:center !important;
+}
+.react-card-front{
+  height:350px !important;
+  width:300px !important;
+  text-align:center !important;
 }
 .react-card-flipper{
   height:350px !important;
   width:300px !important;
-  position: absolute;
-  color:green !important;
 }
 
 .login-container{

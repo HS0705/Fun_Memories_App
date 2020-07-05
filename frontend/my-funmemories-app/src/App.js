@@ -7,10 +7,14 @@ import RegisterPage from './registration';
 import LandingPage from './landingPage';
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.css';
-import AddBookCollection from './books/addCollection';
+import AddBookCollection from './books/addBookCollection';
 import AddBookSeries from './books/addBook';
 import ViewBooks from './books/viewBooks';
 import UpdateBook from './books/updateBook';
+import AddToyCollection from './toys/addToyCollection';
+import AddToySeries from './toys/addToy';
+import UpdateToy from './toys/updateToy';
+import ViewToys from './toys/viewToys';
 
 class App extends Component {
 
@@ -26,6 +30,10 @@ class App extends Component {
         <Route path="/addBook/:id" component={AddBookSeries} />
         <Route path="/viewBooks/:id" component={ViewBooks} />
         <Route path="/updateBook/:id" component={UpdateBook} />
+        <Route path="/addToyCollection/:id" component={AddToyCollection} />
+        <Route path="/addToy/:id" component={AddToySeries} />
+        <Route path="/updateToy/:id" component={UpdateToy} />
+        <Route path="/viewToys/:id" component={ViewToys} />
       </Router>
     )}
 }

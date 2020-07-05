@@ -28,13 +28,14 @@ class UpdateBook extends Component{
                 title:res.data.Book.title,
                 giftBy:res.data.Book.giftBy,
                 startedReading:res.data.Book.startedReading,
-                // finishedReading:res.data.Book.finishedReading,
                 image:res.data.Book.image,
                 comments:res.data.Book.comments
             })
         })
         .catch((err) => {
-            console.log(err);
+            if(err.response){
+                alert(err.response.data);
+            }
         })   
 }
     onChange (event) {
@@ -67,7 +68,9 @@ class UpdateBook extends Component{
             this.props.history.push('/viewBooks/'+this.state.collectionId)
         })
         .catch((err) =>{
-            console.log(err.res);
+            if(err.response){
+                alert(err.response.data);
+            }
         })
     }
     
@@ -75,6 +78,7 @@ class UpdateBook extends Component{
         return(
             <div>
                 <Form className="form-cl" onSubmit ={this.handleBookUpdate}>
+                <h3 align="center">Edit Book Details</h3>
                 <Form.Group controlId="titleId">
                     <Form.Label>Title</Form.Label>
                     <Form.Control  type="text" name="title"  value={this.state.title} onChange={this.onChange} />
@@ -96,13 +100,16 @@ class UpdateBook extends Component{
                     />
                 </Form.Group>
                 <Form.Group controlId="imageId">
-                    <Form.Label>Image</Form.Label>
-                    <img src={this.state.image} alt="book" sytle={{height:"100px",width:"75px"}} />
-                    <input type="file" name="imgFile" placeholder="upload book image" onChange={this.onChangeFile}/>
+                    <div style={{display:"flex"}}>
+                        <Form.Label>Image</Form.Label>
+                        <img src={this.state.image} alt="book" style={{height:"100px",width:"75px"}} />
+                    </div>
+                    
+                    <input type="file" name="imgFile"  placeholder="upload book image" onChange={this.onChangeFile}/>
                 </Form.Group>
                 <Form.Group controlId="commentsId">
                     <Form.Label>Comments</Form.Label>
-                    <Form.Control name="comments" onChange={this.onChange} as="textarea" rows="5" />
+                    <Form.Control name="comments" value= {this.state.comments} onChange={this.onChange} as="textarea" rows="5" />
                 </Form.Group>
                 <Form.Group controlId="updateButtonId">
                     <input type="submit" value="Update" className="btn btn-primary" />

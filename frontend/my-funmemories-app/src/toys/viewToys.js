@@ -3,11 +3,11 @@ import axios from 'axios';
 import {Card, Button, Jumbotron} from 'react-bootstrap';
 import ReactCardFlip from 'react-card-flip';
 
-class ViewBooks extends Component{
+class ViewToys extends Component{
     constructor(props){
         super(props);
         this.state = {
-            books:[],
+            toys:[],
             isFlipped:false,
             searchWord:''
         }
@@ -15,10 +15,10 @@ class ViewBooks extends Component{
         this.onChangeSearch=this.onChangeSearch.bind(this);
     }
     componentDidMount(){
-        axios.get('http://localhost:5000/bookCollection/series/'+this.props.match.params.id)
+        axios.get('http://localhost:5000/toyCollection/series/'+this.props.match.params.id)
         .then((res)=>{
             this.setState({
-                books:res.data.Books
+                toys:res.data.Toys
             })
         })
         .catch((err)=>{
@@ -34,16 +34,16 @@ class ViewBooks extends Component{
         event.preventDefault();
         this.setState((prevState) => ({ isFlipped: !prevState.isFlipped }));
     }
-    handleUpdateBook(id){
-       this.props.history.push('/updateBook/'+id)
+    handleUpdateToy(id){
+       this.props.history.push('/updateToy/'+id)
     }
-    handleDeleteBook(id) {
-            axios.post('http://localhost:5000/bookSeries//deleteBook/'+id)
+    handleDeleteToy(id) {
+            axios.post('http://localhost:5000/toySeries//deleteToy/'+id)
             .then((res)=>{
-                axios.get('http://localhost:5000/bookCollection/series/'+this.props.match.params.id)
+                axios.get('http://localhost:5000/toyCollection/series/'+this.props.match.params.id)
                 .then((res)=>{
                     this.setState({
-                        books:res.data.Books
+                        toys:res.data.Toys
                     })
                 })
                 .catch((err)=>{
@@ -53,48 +53,56 @@ class ViewBooks extends Component{
                 })
             })
             .catch((err)=>{
-                console.log(err)
+                if(err.response){
+                    alert(err.response.data);
+                }
             })
     }
-    showAddBookButton(id){
-        this.props.history.push('/addBook/'+id)
+    showAddToyButton(id){
+        this.props.history.push('/addToy/'+id)
     }
     showData(data) {
         if (data.length===0) {
             return( 
                 <Jumbotron align="text-center">
-                    <p style={{"color":"purple"}}> No books added yet to the collection .Lets start adding memories !!</p>
-                    <Button className="btn-1" onClick={()=>this.showAddBookButton(this.props.match.params.id)}>
-                        AddBook
+                    <p style={{"color":"purple"}}> No toys added yet to the collection .Lets start adding memories !!</p>
+                    <Button className="btn-1" onClick={()=>this.showAddToyButton(this.props.match.params.id)}>
+                        AddToy
                     </Button>
                 </Jumbotron>
                 )
         }
         else{
             return(
-                <div className="flexbox-container" style={{display:"flex",flexDirection:"row"}}>
+                <div className="container-fluid">
                 {data.map((item, key)=>{
                 return (
-                    <ReactCardFlip isFlipped={this.state.isFlipped} flipDirection="horizontal" >
-                        <div key="front" style={{ align:"center",border:"1px solid green"}}>
-                            <img  src={item.image} alt="bookimage" style={{height:"150px",width:"200px"}} />
-                                <h3>{item.title}</h3>
+                    <ReactCardFlip isFlipped={this.state.isFlipped} flipDirection="horizontal" key={key} style={{height:"350px"}} >
+                        <Card  key="front">
+                            <Card.Img variant="top" src={item.image} alt="toyimage" style={{height:"200px"}} />
+                            <Card.Body>
+                                <h4>{item.title}</h4>
                                 <p>Gifted By:{item.giftBy}</p>
-                            <div style={{display:"flex", justifyContent:"space-between"}}>
-                                <Button className="btn-1" onClick={()=>{this.handleUpdateBook(item._id)}}>EDIT</Button>
-                                <Button className="btn-3" onClick={()=>{this.handleDeleteBook(item._id)} }>DELETE</Button>
+                            </Card.Body>
+                            <Card.Footer style={{display:"flex", justifyContent:"space-between"}}>
+                                <Button className="btn-1" onClick={()=>{this.handleUpdateToy(item._id)}}>EDIT</Button>
+                                <Button className="btn-3" onClick={()=>{this.handleDeleteToy(item._id)} }>DELETE</Button>
                                 <Button className="btn-1" onClick={this.handleCardClick}>FLIP</Button>
-                            </div>  
-                        </div>
-                        <div key="back">
-                            <h3>{item.title}</h3><br/>
-                            Started Reading: {item.startedReading}<br />
-                            Finished Reading: {item.finishedReading}<br />
-                            Comments: {item.comments}
-                            <div>
+                            </Card.Footer>  
+                        </Card>
+                        <Card key="back">
+                            <Card.Body>
+                                <Card.Text><h3>{item.title}</h3></Card.Text>
+                                <Card.Text>
+                                Date: {item.date}<br />
+                                Comments: {item.comments}
+                                </Card.Text>
+                                
+                            </Card.Body>
+                            <Card.Footer>
                                 <Button className="btn-1" onClick={this.handleCardClick}>COVER</Button>
-                            </div>
-                        </div>
+                            </Card.Footer>
+                        </Card>
                         </ReactCardFlip>
                     )
                 })}
@@ -102,7 +110,7 @@ class ViewBooks extends Component{
                 )}
                 }
     render() {
-        const data= this.state.books.filter(
+        const data= this.state.toys.filter(
             (item)=>{
                return item.title.indexOf(this.state.searchWord)!== -1 }
            )   ;
@@ -123,4 +131,4 @@ class ViewBooks extends Component{
     }
 }
 
-export default ViewBooks;
+export default ViewToys;

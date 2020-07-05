@@ -6,26 +6,26 @@ import DatePicker from 'react-datepicker';
 import "react-datepicker/dist/react-datepicker.css";
 
 
-class AddBookSeries extends Component{
+class AddToySeries extends Component{
     constructor(props){
         super(props);
         this.state={
             title:'',
             giftBy:'',
-            startedReading: new Date(),
+            date: new Date(),
             comments:'',
             image:''
         }
         this.onChange= this.onChange.bind(this);
         this.onChangeStart=this.onChangeStart.bind(this);
         this.onChangeFile=this.onChangeFile.bind(this);
-        this.handleBook = this.handleBook.bind(this);
+        this.handleToy = this.handleToy.bind(this);
     }
     onChange (event) {
         this.setState({[event.target.name] : event.target.value})
     }
     onChangeStart(date){
-        this.setState({startedReading : date})
+        this.setState({date : date})
     }
     
   
@@ -37,31 +37,30 @@ class AddBookSeries extends Component{
         this.setState({image:event.target.result})
     }
 }
-    handleBook (event){
+    handleToy (event){
         event.preventDefault();
-        const newBook = {
+        const newToy = {
             collectionId:this.props.match.params.id,
             title:this.state.title,
             giftBy:this.state.giftBy,
-            startedReading:this.state.startedReading,
+            date:this.state.date,
             comments:this.state.comments,
             image:this.state.image
         }
-        axios.post('http://localhost:5000/bookSeries/addBook', newBook) 
+        axios.post('http://localhost:5000/toySeries/addToy', newToy) 
         .then ((res) => {
-            alert("Book added to the collection!")
+            alert("Toy added to the collection!")
         })
         .catch((err) =>{
             if(err.response){
                 alert(err.response.data);
             }
-
         })
         this.setState({
             collectionId:this.props.match.params.id,
             title:'',
             giftBy:'',
-            startedReading:'',
+            date:'',
             comments:'',
             image:''
         })
@@ -70,31 +69,31 @@ class AddBookSeries extends Component{
         
         return(
             <div>
-                <Form className="form-cl" onSubmit ={this.handleBook}>
-                <h3 align="center">New Book</h3>
+                <Form className="form-cl" onSubmit ={this.handleToy}>
+                <h3 align="center">New Toy</h3>
                 <Form.Group controlId="titleId">
                     <Form.Label>Title</Form.Label>
                     <Form.Control  type="text" name="title" placeholder="Enter the title " value={this.state.title} onChange={this.onChange} />
                 </Form.Group>
                 <Form.Group controlId="giftById">
                     <Form.Label>Gifted By</Form.Label>
-                    <Form.Control  type="text" name="giftBy" placeholder="Enter the name of person who gifted the book " value={this.state.giftBy} onChange={this.onChange} />
+                    <Form.Control  type="text" name="giftBy" placeholder="Enter the name of person who gifted the toy " value={this.state.giftBy} onChange={this.onChange} />
                 </Form.Group>
-                <Form.Group controlId="startedId">
-                    <Form.Label>Started Reading</Form.Label>
+                <Form.Group controlId="dateId">
+                    <Form.Label>Date</Form.Label>
                     <DatePicker
-                        selected={this.state.startedReading}
+                        selected={this.state.date}
                         onChange={ this.onChangeStart}
                         dateFormat="MM/dd/yyyy"
                     />
                 </Form.Group>
                 <Form.Group controlId="imageId">
                     <Form.Label>Image</Form.Label>
-                    <input type="file" name="imgFile" placeholder="upload book image" onChange={this.onChangeFile}/>
+                    <input type="file" name="imgFile"  placeholder="upload toy image" onChange={this.onChangeFile}/>
                 </Form.Group>
                 <Form.Group controlId="commentsId">
                     <Form.Label>Comments</Form.Label>
-                    <Form.Control name="comments" value= {this.state.comments} onChange={this.onChange} as="textarea" rows="5" />
+                    <Form.Control name="comments" value={this.state.comments} onChange={this.onChange} as="textarea" rows="5" />
                 </Form.Group>
                 <Form.Group controlId="addButtonId">
                     <input type="submit" value="ADD" className="btn btn-primary" />
@@ -104,4 +103,4 @@ class AddBookSeries extends Component{
     }
 }
 
-export default AddBookSeries;
+export default AddToySeries;
