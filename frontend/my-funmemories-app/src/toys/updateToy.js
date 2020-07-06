@@ -20,6 +20,7 @@ class UpdateToy extends Component{
     componentDidMount() {
         axios.get('http://localhost:5000/toySeries/toy/'+this.props.match.params.id)
         .then((res) => {
+            console.log(res)
             this.setState({
                 collectionId:res.data.Toy.collectionId,
                 collectionName:res.data.Toy.collectionName,
@@ -32,7 +33,9 @@ class UpdateToy extends Component{
             })
         })
         .catch((err) => {
-            console.log(err);
+            if(err.response){
+                alert(err.response.data);
+            }
         })   
 }
     onChange (event) {
@@ -41,7 +44,12 @@ class UpdateToy extends Component{
     onChangeFile (event){
         let file =event.target.files;
         let fileReader = new FileReader();
-        fileReader.readAsDataURL(file[0]);
+        if(event.target.files[0]){
+            fileReader.readAsDataURL(file[0])
+           }
+        else{
+            alert("Error uploading an image, Please Try again")
+        }
         fileReader.onload = (event)=>{
             this.setState({image:event.target.result})
         }
@@ -50,7 +58,7 @@ class UpdateToy extends Component{
         event.preventDefault();
         const updatedToy = {
             collectionId:this.state.collectionId,
-            collectionName:this.props.match.params.brand,
+            collectionName:this.props.match.params.title,
             category:this.props.match.params.category,
             title:this.state.title,
             giftBy:this.state.giftBy,
@@ -73,9 +81,9 @@ class UpdateToy extends Component{
             <div>
                 <Form className="form-cl" onSubmit ={this.handleToyUpdate}>
                 <h3 align="center">Edit Toy Details</h3>
-                <Form.Group controlId="brandId">
-                    <Form.Label>Brand</Form.Label>
-                    <Form.Control  readOnly type="text" name="brand"  value={this.props.match.params.brand}  />
+                <Form.Group controlId="collectionNameId">
+                    <Form.Label>Collection Name</Form.Label>
+                    <Form.Control  readOnly type="text" name="collectionName"  value={this.props.match.params.title}  />
                 </Form.Group>
                 <Form.Group controlId="categoryId">
                     <Form.Label>Category</Form.Label>
@@ -95,7 +103,7 @@ class UpdateToy extends Component{
                 </Form.Group>
                 <Form.Group controlId="imageId">
                     <img src={this.state.image} alt="Toy" style={{ height:"200px",width:"150px" }} />
-                    <input type="file" name="imgFile"  onChange={this.onChangeFile}/>
+                    <input type="file" name="imgFile" accept="image/x-png,image/gif,image/jpeg" onChange={this.onChangeFile}/>
                 </Form.Group>
                 <Form.Group controlId="commentsId">
                     <Form.Label>Comments</Form.Label>

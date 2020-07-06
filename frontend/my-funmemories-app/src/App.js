@@ -31,9 +31,9 @@ class App extends Component {
         <Route path="/viewBooks/:id/:title/:category" component={ViewBooks} />
         <Route path="/updateBook/:id/:title/:category" component={UpdateBook} />
         <Route path="/addToyCollection/:id" component={AddToyCollection} />
-        <Route path="/addToy/:id/:brand/:category" component={AddToySeries} />
-        <Route path="/updateToy/:id/:brand/:category" component={UpdateToy} />
-        <Route path="/viewToys/:id/:brand/:category" component={ViewToys} />
+        <Route path="/addToy/:id/:title/:category" component={AddToySeries} />
+        <Route path="/updateToy/:id/:title/:category" component={UpdateToy} />
+        <Route path="/viewToys/:id/:title/:category" component={ViewToys} />
       </Router>
     )}
 }

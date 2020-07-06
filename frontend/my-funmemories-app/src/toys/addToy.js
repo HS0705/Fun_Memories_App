@@ -32,7 +32,12 @@ class AddToySeries extends Component{
    onChangeFile (event){
     let file =event.target.files;
     let fileReader = new FileReader();
-    fileReader.readAsDataURL(file[0]);
+    if(event.target.files[0]){
+        fileReader.readAsDataURL(file[0])
+       }
+    else{
+        alert("Error uploading an image, Please Try again")
+    }
     fileReader.onload = (event)=>{
         this.setState({image:event.target.result})
     }
@@ -41,6 +46,8 @@ class AddToySeries extends Component{
         event.preventDefault();
         const newToy = {
             collectionId:this.props.match.params.id,
+            collectionName:this.props.match.params.title,
+            category:this.props.match.params.category,
             title:this.state.title,
             giftBy:this.state.giftBy,
             date:this.state.date,
@@ -50,6 +57,7 @@ class AddToySeries extends Component{
         axios.post('http://localhost:5000/toySeries/addToy', newToy) 
         .then ((res) => {
             alert("Toy added to the collection!")
+            this.props.history.push('/landing');
         })
         .catch((err) =>{
             if(err.response){
@@ -58,6 +66,8 @@ class AddToySeries extends Component{
         })
         this.setState({
             collectionId:this.props.match.params.id,
+            collectionName:this.props.match.params.title,
+            category:this.props.match.params.category,
             title:'',
             giftBy:'',
             date:'',
@@ -66,14 +76,14 @@ class AddToySeries extends Component{
         })
     }
     render() {
-        
+        console.log(this.props)
         return(
             <div>
                 <Form className="form-cl" onSubmit ={this.handleToy}>
                 <h3 align="center">New Toy</h3>
-                <Form.Group controlId="brandId">
-                    <Form.Label>Brand</Form.Label>
-                    <Form.Control  readOnly type="text" name="brand"  value={this.props.match.params.brand}  />
+                <Form.Group controlId="collectionNameId">
+                    <Form.Label>Collection Name</Form.Label>
+                    <Form.Control  readOnly type="text" name="collectionName"  value={this.props.match.params.title}  />
                 </Form.Group>
                 <Form.Group controlId="categoryId">
                     <Form.Label>Category</Form.Label>
@@ -97,7 +107,7 @@ class AddToySeries extends Component{
                 </Form.Group>
                 <Form.Group controlId="imageId">
                     <Form.Label>Image</Form.Label>
-                    <input type="file" name="imgFile"  placeholder="upload toy image" onChange={this.onChangeFile}/>
+                    <input type="file" name="imgFile"  accept="image/x-png,image/gif,image/jpeg" onChange={this.onChangeFile}/>
                 </Form.Group>
                 <Form.Group controlId="commentsId">
                     <Form.Label>Comments</Form.Label>

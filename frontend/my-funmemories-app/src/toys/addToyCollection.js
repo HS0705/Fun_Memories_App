@@ -23,7 +23,12 @@ class AddToyCollection extends Component{
    onChangeFile (event){
        let file =event.target.files;
        let fileReader = new FileReader();
-       fileReader.readAsDataURL(file[0]);
+       if(event.target.files[0]){
+        fileReader.readAsDataURL(file[0])
+       }
+       else{
+           alert("Error uploading an image, Please Try again")
+       }
        fileReader.onload = (event)=>{
            this.setState({image:event.target.result})
        }
@@ -90,7 +95,7 @@ class AddToyCollection extends Component{
                 </Form.Group>
                 <Form.Group controlId="imageId">
                     <Form.Label>Image</Form.Label>
-                    <input type="file" name="imgFile" placeholder="upload toy image" onChange={this.onChangeFile}/>
+                    <input type="file" name="imgFile" accept="image/x-png,image/gif,image/jpeg" onChange={this.onChangeFile}/>
                 </Form.Group>
                 <Form.Group controlId="commentsId">
                     <Form.Label>Comments</Form.Label>

@@ -53,10 +53,10 @@ class LandingPage extends Component{
         this.props.history.push('/viewBooks/'+data.id+'/'+data.title+'/'+data.category)
     }
     showViewToysButton(data){
-        this.props.history.push('/viewToys/'+data.id+'/'+data.brand+'/'+data.category)
+        this.props.history.push('/viewToys/'+data.id+'/'+data.title+'/'+data.category)
     }
     showAddToyButton(data){
-        this.props.history.push('/addToy/'+data.id+'/'+data.brand+'/'+data.category)
+        this.props.history.push('/addToy/'+data.id+'/'+data.title+'/'+data.category)
     }
     showAddBookButton(data){
         this.props.history.push('/addBook/'+data.id+'/'+data.title+'/'+data.category)
@@ -165,10 +165,10 @@ class LandingPage extends Component{
                                         Category: {item.category}
                                 </Card.Body>
                                 <Card.Footer style={{display:"flex", justifyContent:"space-between"}}>
-                                    <Button className="btn-1" onClick={()=>this.showViewToysButton({id:item._id,brand:item.brand,category:item.category})}>
+                                    <Button className="btn-1" onClick={()=>this.showViewToysButton({id:item._id,title:item.title,category:item.category})}>
                                         ViewCollection
                                     </Button>
-                                    <Button className="btn-1" onClick={()=>this.showAddToyButton({id:item._id,brand:item.brand,category:item.category})}>
+                                    <Button className="btn-1" onClick={()=>this.showAddToyButton({id:item._id,title:item.title,category:item.category})}>
                                         AddToy
                                     </Button>
                                 </Card.Footer>

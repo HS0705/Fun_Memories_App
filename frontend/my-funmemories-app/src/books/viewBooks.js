@@ -67,32 +67,36 @@ class ViewBooks extends Component{
         }
         else{
             return(
-                <div className="flexbox-container" style={{display:"flex",flexDirection:"row", padding:"10px 10px 10px 10px",align:"center"}} >
-                {data.map((item, key)=>{
-                return (
-                    <div className="flip-card" key= {key}style={{display:"flex"}} >
-                        <div className="flip-card-inner">
-                        <div className="flip-card-front">
-                            <img  className="img-class" src={item.image} alt="bookimage" style={{height:"400px",width:"300px"}}/>                 
-                        </div>
-                        <div className="flip-card-back" >
-                            <div>
-                                <h3> {item.title.toUpperCase()} </h3>
-                                <p>Category:{item.category}</p>
-                                <p> Gifted By:{item.giftBy}</p>
-                                <p> Started Reading: {item.startedReading.slice(0,10)}</p>
-                                <p> Finished Reading: {item.finishedReading.slice(0,10)}</p>
-                                <p> Comments: {item.comments}</p>
+                <div className="flexbox-container" style={{align:"center"}} >
+                    <div className="row">
+                    {data.map((item, key)=>{
+                    return (
+                        <div className="col-md-3">
+                        <div className="flip-card" key= {key} >
+                            <div className="flip-card-inner">
+                            <div className="flip-card-front">
+                                <img  className="img-class" src={item.image} alt="bookimage" style={{height:"400px",width:"300px"}}/>                 
                             </div>
-                            <div style={{display:"flex", justifyContent:"center"}}>
-                                <Button className="btn-1" onClick={()=>{this.handleUpdateBook({id:item._id,title:this.props.match.params.title,category:this.props.match.params.category})}}>EDIT</Button>
-                                <Button className="btn-3" onClick={()=>{this.handleDeleteBook(item._id)} }>DELETE</Button>
+                            <div className="flip-card-back" >
+                                <div>
+                                    <h3> {item.title.toUpperCase()} </h3>
+                                    <p>Category:{item.category}</p>
+                                    <p> Gifted By:{item.giftBy}</p>
+                                    <p> Started Reading: {item.startedReading.slice(0,10)}</p>
+                                    <p> Finished Reading: {item.finishedReading.slice(0,10)}</p>
+                                    <p> Comments: {item.comments}</p>
+                                </div>
+                                <div style={{display:"flex", justifyContent:"center"}}>
+                                    <Button className="btn-1" onClick={()=>{this.handleUpdateBook({id:item._id,title:this.props.match.params.title,category:this.props.match.params.category})}}>EDIT</Button>
+                                    <Button className="btn-3" onClick={()=>{this.handleDeleteBook(item._id)} }>DELETE</Button>
+                                </div>
+                            </div>
                             </div>
                         </div>
                         </div>
-                    </div>
-                    )
-                })}
+                        )
+                    })}
+                </div>
                 </div>
                 )}
                 }

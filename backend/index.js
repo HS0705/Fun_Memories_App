@@ -305,6 +305,7 @@ userRoute.post('/register', ( req,res ) =>{
     })
     //get specific toy collection 
     toyCollectionRoute.get('/series/:id',(req, res)=> {
+        console.log(req.body)
         toySeries.find({collectionId:req.params.id})
         .then((toys) =>{
             res.status(200).json({'Toys': toys}); 

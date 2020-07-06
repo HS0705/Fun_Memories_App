@@ -131,9 +131,8 @@ p{
   width: 300px;
   height: 400px;
   perspective: 1000px;
-  padding:15px 15px 15px 15px !important;
-  margin:0 0 0 20px;
- 
+  padding:10px 10px 10px 10px !important;
+  margin:10px 10px 10px 10px;
 }
 
 .flip-card-inner {

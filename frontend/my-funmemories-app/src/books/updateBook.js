@@ -46,7 +46,12 @@ class UpdateBook extends Component{
     onChangeFile (event){
         let file =event.target.files;
         let fileReader = new FileReader();
-        fileReader.readAsDataURL(file[0]);
+        if(event.target.files[0]){
+            fileReader.readAsDataURL(file[0])
+           }
+        else{
+            alert("Error uploading an image, Please Try again")
+        }
         fileReader.onload = (event)=>{
             this.setState({image:event.target.result})
         }
@@ -108,7 +113,7 @@ class UpdateBook extends Component{
                     <div style={{display:"flex"}}>
                         <img src={this.state.image} alt="book" style={{height:"200px",width:"150px"}} />
                     </div>
-                    <input type="file" name="imgFile"  placeholder="upload book image" onChange={this.onChangeFile}/>
+                    <input type="file" name="imgFile"  accept="image/x-png,image/gif,image/jpeg" onChange={this.onChangeFile}/>
                 </Form.Group>
                 <Form.Group controlId="commentsId">
                     <Form.Label>Comments</Form.Label>
