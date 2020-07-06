@@ -1,17 +1,15 @@
 import React, {Component} from 'react';
 import axios from 'axios';
-import {Card, Button, Jumbotron} from 'react-bootstrap';
-import ReactCardFlip from 'react-card-flip';
+import { Button, Jumbotron} from 'react-bootstrap';
+
 
 class ViewToys extends Component{
     constructor(props){
         super(props);
         this.state = {
             toys:[],
-            isFlipped:false,
             searchWord:''
         }
-        this.handleCardClick = this.handleCardClick.bind(this);
         this.onChangeSearch=this.onChangeSearch.bind(this);
     }
     componentDidMount(){
@@ -30,12 +28,8 @@ class ViewToys extends Component{
     onChangeSearch(event){
         this.setState({searchWord:event.target.value.toLowerCase()})
     }
-    handleCardClick(event){
-        event.preventDefault();
-        this.setState((prevState) => ({ isFlipped: !prevState.isFlipped }));
-    }
-    handleUpdateToy(id){
-       this.props.history.push('/updateToy/'+id)
+    handleUpdateToy(data){
+       this.props.history.push('/updateToy/'+data.id+'/'+data.brand+'/'+data.category)
     }
     handleDeleteToy(id) {
             axios.post('http://localhost:5000/toySeries//deleteToy/'+id)
@@ -58,15 +52,15 @@ class ViewToys extends Component{
                 }
             })
     }
-    showAddToyButton(id){
-        this.props.history.push('/addToy/'+id)
+    showAddToyButton(data){
+        this.props.history.push('/addToy/'+data.id+'/'+data.brand+'/'+data.category)
     }
     showData(data) {
         if (data.length===0) {
             return( 
                 <Jumbotron align="text-center">
                     <p style={{"color":"purple"}}> No toys added yet to the collection .Lets start adding memories !!</p>
-                    <Button className="btn-1" onClick={()=>this.showAddToyButton(this.props.match.params.id)}>
+                    <Button className="btn-1" onClick={()=>this.showAddToyButton({id:this.props.match.params.id,brand:this.props.match.params.brand,category:this.props.match.params.category}) }>
                         AddToy
                     </Button>
                 </Jumbotron>
@@ -74,36 +68,29 @@ class ViewToys extends Component{
         }
         else{
             return(
-                <div className="container-fluid">
+                <div className="flexbox-container" style={{display:"flex",flexDirection:"row", padding:"10px 10px 10px 10px",align:"center"}}>
                 {data.map((item, key)=>{
                 return (
-                    <ReactCardFlip isFlipped={this.state.isFlipped} flipDirection="horizontal" key={key} style={{height:"350px"}} >
-                        <Card  key="front">
-                            <Card.Img variant="top" src={item.image} alt="toyimage" style={{height:"200px"}} />
-                            <Card.Body>
-                                <h4>{item.title}</h4>
-                                <p>Gifted By:{item.giftBy}</p>
-                            </Card.Body>
-                            <Card.Footer style={{display:"flex", justifyContent:"space-between"}}>
-                                <Button className="btn-1" onClick={()=>{this.handleUpdateToy(item._id)}}>EDIT</Button>
+                    <div className="flip-card" key= {key}style={{display:"flex"}} >
+                        <div className="flip-card-inner">
+                        <div className="flip-card-front">
+                            <img  className="img-class" src={item.image} alt="toyimage" style={{height:"400px",width:"300px"}}/>                 
+                        </div>
+                        <div className="flip-card-back" >
+                            <div>
+                                <h3> {item.title.toUpperCase()} </h3>
+                                <p>Category:{item.category}</p>
+                                <p> Gifted By:{item.giftBy}</p>
+                                <p> Date: {item.date.slice(0,10)}</p>
+                                <p> Comments: {item.comments}</p>
+                            </div>
+                            <div style={{display:"flex", justifyContent:"center"}}>
+                                <Button className="btn-1" onClick={()=>{this.handleUpdateToy({id:item._id,brand:this.props.match.params.brand,category:this.props.match.params.category}) }}>EDIT</Button>
                                 <Button className="btn-3" onClick={()=>{this.handleDeleteToy(item._id)} }>DELETE</Button>
-                                <Button className="btn-1" onClick={this.handleCardClick}>FLIP</Button>
-                            </Card.Footer>  
-                        </Card>
-                        <Card key="back">
-                            <Card.Body>
-                                <Card.Text><h3>{item.title}</h3></Card.Text>
-                                <Card.Text>
-                                Date: {item.date}<br />
-                                Comments: {item.comments}
-                                </Card.Text>
-                                
-                            </Card.Body>
-                            <Card.Footer>
-                                <Button className="btn-1" onClick={this.handleCardClick}>COVER</Button>
-                            </Card.Footer>
-                        </Card>
-                        </ReactCardFlip>
+                            </div>
+                        </div>
+                        </div>
+                    </div>
                     )
                 })}
                 </div>
@@ -117,7 +104,7 @@ class ViewToys extends Component{
         return(
             <div className="container-fluid">
                 <div style={{display: "flex", justifyContent: "space-between",align:"text-center", paddingTop:"15px"}}>
-                    <h3> Amazing Collection</h3>
+                    <h3> <span>{this.props.match.params.brand.toUpperCase()} </span></h3>
                     <div style={{justifyContent:"flex-end"}}>
                         <input type="text"  className="searchBox" placeholder="Search by Title" onChange={this.onChangeSearch} style={{width:"350px",color:"green"}}/>
                     </div>

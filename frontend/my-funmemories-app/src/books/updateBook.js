@@ -11,12 +11,11 @@ class UpdateBook extends Component{
             title:'',
             giftBy:'',
             startedReading:'',
-            finishedReading:new Date(),
+            finishedReading:'',
             comments:'',
             image:''
         }
         this.onChange= this.onChange.bind(this);
-        this.onChangeFinishDate=this.onChangeFinishDate.bind(this);
         this.onChangeFile=this.onChangeFile.bind(this);
         this.handleBookUpdate = this.handleBookUpdate.bind(this);
     }
@@ -25,9 +24,12 @@ class UpdateBook extends Component{
         .then((res) => {
             this.setState({
                 collectionId:res.data.Book.collectionId,
+                collectionName:res.data.Book.collectionName,
+                category:res.data.Book.category,
                 title:res.data.Book.title,
                 giftBy:res.data.Book.giftBy,
                 startedReading:res.data.Book.startedReading,
+                finishedReading:res.data.Book.finishedReading,
                 image:res.data.Book.image,
                 comments:res.data.Book.comments
             })
@@ -41,9 +43,6 @@ class UpdateBook extends Component{
     onChange (event) {
         this.setState({[event.target.name] : event.target.value})
     }
-    onChangeFinishDate(date){
-     this.setState({finishedReading: date})
-    }
     onChangeFile (event){
         let file =event.target.files;
         let fileReader = new FileReader();
@@ -56,6 +55,8 @@ class UpdateBook extends Component{
         event.preventDefault();
         const updatedBook = {
             collectionId:this.state.collectionId,
+            collectionName:this.props.match.params.collectionName,
+            category:this.props.match.params.category,
             title:this.state.title,
             giftBy:this.state.giftBy,
             startedReading:this.state.startedReading,
@@ -65,7 +66,7 @@ class UpdateBook extends Component{
         }
         axios.post('http://localhost:5000/bookSeries/updateBook/'+this.props.match.params.id, updatedBook) 
         .then ((res) => {
-            this.props.history.push('/viewBooks/'+this.state.collectionId)
+            this.props.history.push('/landing/')
         })
         .catch((err) =>{
             if(err.response){
@@ -79,6 +80,14 @@ class UpdateBook extends Component{
             <div>
                 <Form className="form-cl" onSubmit ={this.handleBookUpdate}>
                 <h3 align="center">Edit Book Details</h3>
+                <Form.Group controlId="nameId">
+                    <Form.Label>Collection Name</Form.Label>
+                    <Form.Control  readOnly type="text" name="collectionName" value={this.props.match.params.title}  />
+                </Form.Group>
+                <Form.Group controlId="categoryId">
+                    <Form.Label>Category</Form.Label>
+                    <Form.Control  readOnly type="text" name="category"  value={this.props.match.params.category}  />
+                </Form.Group>
                 <Form.Group controlId="titleId">
                     <Form.Label>Title</Form.Label>
                     <Form.Control  type="text" name="title"  value={this.state.title} onChange={this.onChange} />
@@ -92,19 +101,13 @@ class UpdateBook extends Component{
                     <Form.Control type="text" readOnly  value={this.state.startedReading} />
                 </Form.Group>
                 <Form.Group controlId="finishedId">
-                    <Form.Label>Finished Reading</Form.Label>
-                    <DatePicker
-                        selected={ this.state.finishedReading }
-                        onChange={ this.onChangeFinishDate}
-                        dateFormat="MM/dd/yyyy"
-                    />
+                    <Form.Label> Finished Reading</Form.Label>
+                    <Form.Control type="text" readOnly  value={this.state.finishedReading} />
                 </Form.Group>
                 <Form.Group controlId="imageId">
                     <div style={{display:"flex"}}>
-                        <Form.Label>Image</Form.Label>
-                        <img src={this.state.image} alt="book" style={{height:"100px",width:"75px"}} />
+                        <img src={this.state.image} alt="book" style={{height:"200px",width:"150px"}} />
                     </div>
-                    
                     <input type="file" name="imgFile"  placeholder="upload book image" onChange={this.onChangeFile}/>
                 </Form.Group>
                 <Form.Group controlId="commentsId">

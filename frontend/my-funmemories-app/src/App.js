@@ -27,13 +27,13 @@ class App extends Component {
         <Route path="/register" component={RegisterPage} />
         <Route path="/landing" component={LandingPage} />
         <Route path="/addBookCollection/:id" component={AddBookCollection} />
-        <Route path="/addBook/:id" component={AddBookSeries} />
-        <Route path="/viewBooks/:id" component={ViewBooks} />
-        <Route path="/updateBook/:id" component={UpdateBook} />
+        <Route path="/addBook/:id/:title/:category" component={AddBookSeries} />
+        <Route path="/viewBooks/:id/:title/:category" component={ViewBooks} />
+        <Route path="/updateBook/:id/:title/:category" component={UpdateBook} />
         <Route path="/addToyCollection/:id" component={AddToyCollection} />
-        <Route path="/addToy/:id" component={AddToySeries} />
-        <Route path="/updateToy/:id" component={UpdateToy} />
-        <Route path="/viewToys/:id" component={ViewToys} />
+        <Route path="/addToy/:id/:brand/:category" component={AddToySeries} />
+        <Route path="/updateToy/:id/:brand/:category" component={UpdateToy} />
+        <Route path="/viewToys/:id/:brand/:category" component={ViewToys} />
       </Router>
     )}
 }

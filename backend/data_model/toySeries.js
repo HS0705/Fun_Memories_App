@@ -6,6 +6,13 @@ let toySeriesSchema =new Schema({
         type:String,
         required:true
     },
+    collectionName:{
+        type:String,
+        required:true
+    },
+    category:{
+        type:String,
+    },
     title:{
         type:String,
         required:true

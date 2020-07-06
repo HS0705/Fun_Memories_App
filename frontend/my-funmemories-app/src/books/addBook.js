@@ -13,11 +13,13 @@ class AddBookSeries extends Component{
             title:'',
             giftBy:'',
             startedReading: new Date(),
+            finishedReading: new Date(),
             comments:'',
             image:''
         }
         this.onChange= this.onChange.bind(this);
         this.onChangeStart=this.onChangeStart.bind(this);
+        this.onChangeEnd=this.onChangeEnd.bind(this);
         this.onChangeFile=this.onChangeFile.bind(this);
         this.handleBook = this.handleBook.bind(this);
     }
@@ -27,7 +29,9 @@ class AddBookSeries extends Component{
     onChangeStart(date){
         this.setState({startedReading : date})
     }
-    
+    onChangeEnd(date){
+        this.setState({finishedReading : date})
+    }
   
    onChangeFile (event){
     let file =event.target.files;
@@ -41,9 +45,12 @@ class AddBookSeries extends Component{
         event.preventDefault();
         const newBook = {
             collectionId:this.props.match.params.id,
+            collectionName:this.props.match.params.title,
+            category:this.props.match.params.category,
             title:this.state.title,
             giftBy:this.state.giftBy,
             startedReading:this.state.startedReading,
+            finishedReading:this.state.finishedReading,
             comments:this.state.comments,
             image:this.state.image
         }
@@ -59,19 +66,29 @@ class AddBookSeries extends Component{
         })
         this.setState({
             collectionId:this.props.match.params.id,
+            collectionName:this.props.match.params.title,
+            category:this.props.match.params.category,
             title:'',
             giftBy:'',
             startedReading:'',
+            finishedReading:'',
             comments:'',
             image:''
         })
     }
     render() {
-        
         return(
             <div>
                 <Form className="form-cl" onSubmit ={this.handleBook}>
                 <h3 align="center">New Book</h3>
+                <Form.Group controlId="nameId">
+                    <Form.Label>Collection Name</Form.Label>
+                    <Form.Control  readOnly type="text" name="collectionName" value={this.props.match.params.title}  />
+                </Form.Group>
+                <Form.Group controlId="categoryId">
+                    <Form.Label>Category</Form.Label>
+                    <Form.Control  readOnly type="text" name="category"  value={this.props.match.params.category}  />
+                </Form.Group>
                 <Form.Group controlId="titleId">
                     <Form.Label>Title</Form.Label>
                     <Form.Control  type="text" name="title" placeholder="Enter the title " value={this.state.title} onChange={this.onChange} />
@@ -85,6 +102,14 @@ class AddBookSeries extends Component{
                     <DatePicker
                         selected={this.state.startedReading}
                         onChange={ this.onChangeStart}
+                        dateFormat="MM/dd/yyyy"
+                    />
+                </Form.Group>
+                <Form.Group controlId="startedId">
+                    <Form.Label>Finished Reading</Form.Label>
+                    <DatePicker
+                        selected={this.state.finishedReading}
+                        onChange={ this.onChangeEnd}
                         dateFormat="MM/dd/yyyy"
                     />
                 </Form.Group>

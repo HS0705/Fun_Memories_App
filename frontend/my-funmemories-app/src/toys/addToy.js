@@ -71,6 +71,14 @@ class AddToySeries extends Component{
             <div>
                 <Form className="form-cl" onSubmit ={this.handleToy}>
                 <h3 align="center">New Toy</h3>
+                <Form.Group controlId="brandId">
+                    <Form.Label>Brand</Form.Label>
+                    <Form.Control  readOnly type="text" name="brand"  value={this.props.match.params.brand}  />
+                </Form.Group>
+                <Form.Group controlId="categoryId">
+                    <Form.Label>Category</Form.Label>
+                    <Form.Control  readOnly type="text" name="category"  value={this.props.match.params.category}  />
+                </Form.Group>
                 <Form.Group controlId="titleId">
                     <Form.Label>Title</Form.Label>
                     <Form.Control  type="text" name="title" placeholder="Enter the title " value={this.state.title} onChange={this.onChange} />

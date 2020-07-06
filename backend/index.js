@@ -189,6 +189,8 @@ userRoute.post('/register', ( req,res ) =>{
         .then((collection)=>{
             let newBook = {
                 collectionId:req.body.collectionId,
+                collectionName:req.body.collectionName,
+                category:req.body.category,
                 title:req.body.title.toLowerCase(),
                 giftBy:req.body.giftBy.toLowerCase(),
                 startedReading:req.body.startedReading,
@@ -230,6 +232,8 @@ userRoute.post('/register', ( req,res ) =>{
         else{
              bookSeries.updateOne({_id:req.params.id},
                 { $set:{
+                    collectionName:req.body.collectionName,
+                    category:req.body.category,
                     title: req.body.title.toLowerCase(),
                     giftBy:req.body.giftBy.toLowerCase(),
                     startedReading:req.body.startedReading,
@@ -316,6 +320,8 @@ userRoute.post('/register', ( req,res ) =>{
         .then((collection)=>{
             let newToy = {
                 collectionId:req.body.collectionId,
+                collectionName:req.body.collectionName,
+                category:req.body.category,
                 title:req.body.title.toLowerCase(),
                 giftBy:req.body.giftBy.toLowerCase(),
                 date:req.body.date,
@@ -345,6 +351,8 @@ userRoute.post('/register', ( req,res ) =>{
             else{
                  toySeries.updateOne({_id:req.params.id},
                     { $set:{
+                        collectionName:req.body.collectionName,
+                        category:req.body.category,
                         title: req.body.title.toLowerCase(),
                         giftBy:req.body.giftBy.toLowerCase(),
                         date:req.body.date,
@@ -363,7 +371,7 @@ userRoute.post('/register', ( req,res ) =>{
             })                                        
         })  
     
-        //Delete specific book
+        //Delete specific toy
         toySeriesRoute.post('/deleteToy/:id',(req,res) => {
             toySeries.deleteOne({_id:req.params.id}, (err ,result) =>{
                 if(!result){

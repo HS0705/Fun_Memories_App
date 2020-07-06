@@ -1,7 +1,6 @@
 import React,{Component} from 'react';
 import axios from 'axios';
 import {Form} from 'react-bootstrap';
-import DatePicker from 'react-datepicker';
 
 class UpdateToy extends Component{
     constructor(props){
@@ -23,6 +22,8 @@ class UpdateToy extends Component{
         .then((res) => {
             this.setState({
                 collectionId:res.data.Toy.collectionId,
+                collectionName:res.data.Toy.collectionName,
+                category:res.data.Toy.category,
                 title:res.data.Toy.title,
                 giftBy:res.data.Toy.giftBy,
                 date:res.data.Toy.date,
@@ -49,6 +50,8 @@ class UpdateToy extends Component{
         event.preventDefault();
         const updatedToy = {
             collectionId:this.state.collectionId,
+            collectionName:this.props.match.params.brand,
+            category:this.props.match.params.category,
             title:this.state.title,
             giftBy:this.state.giftBy,
             date:this.state.date,
@@ -65,12 +68,19 @@ class UpdateToy extends Component{
             }
         })
     }
-    
     render() {
         return(
             <div>
                 <Form className="form-cl" onSubmit ={this.handleToyUpdate}>
                 <h3 align="center">Edit Toy Details</h3>
+                <Form.Group controlId="brandId">
+                    <Form.Label>Brand</Form.Label>
+                    <Form.Control  readOnly type="text" name="brand"  value={this.props.match.params.brand}  />
+                </Form.Group>
+                <Form.Group controlId="categoryId">
+                    <Form.Label>Category</Form.Label>
+                    <Form.Control  readOnly type="text" name="category"  value={this.props.match.params.category}  />
+                </Form.Group>
                 <Form.Group controlId="titleId">
                     <Form.Label>Title</Form.Label>
                     <Form.Control  type="text" name="title"  value={this.state.title} onChange={this.onChange} />
@@ -84,9 +94,8 @@ class UpdateToy extends Component{
                     <Form.Control type="text" readOnly  value={this.state.date} />
                 </Form.Group>
                 <Form.Group controlId="imageId">
-                    <Form.Label>Image</Form.Label>
-                    <img src={this.state.image} alt="Toy" style={{ height:"100px",width:"75px" }} />
-                    <input type="file" name="imgFile"  placeholder="upload toy image" onChange={this.onChangeFile}/>
+                    <img src={this.state.image} alt="Toy" style={{ height:"200px",width:"150px" }} />
+                    <input type="file" name="imgFile"  onChange={this.onChangeFile}/>
                 </Form.Group>
                 <Form.Group controlId="commentsId">
                     <Form.Label>Comments</Form.Label>
