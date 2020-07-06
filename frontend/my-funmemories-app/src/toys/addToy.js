@@ -76,7 +76,6 @@ class AddToySeries extends Component{
         })
     }
     render() {
-        console.log(this.props)
         return(
             <div>
                 <Form className="form-cl" onSubmit ={this.handleToy}>

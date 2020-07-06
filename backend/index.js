@@ -305,7 +305,6 @@ userRoute.post('/register', ( req,res ) =>{
     })
     //get specific toy collection 
     toyCollectionRoute.get('/series/:id',(req, res)=> {
-        console.log(req.body)
         toySeries.find({collectionId:req.params.id})
         .then((toys) =>{
             res.status(200).json({'Toys': toys}); 
@@ -342,7 +341,17 @@ userRoute.post('/register', ( req,res ) =>{
             res.send("Error" + err)
         })        
     }) 
-
+    //Get Specific toy
+    toySeriesRoute.get('/toy/:id',(req, res)=> {
+        toySeries.findOne({_id:req.params.id},(err,toy) =>{
+            if(!toy){
+                res.status(400).json('Error, cannot find the book ');
+            }
+            else{
+                res.status(200).json({'Toy': toy});
+            }
+        })
+    })
     //Update Specific Toy
     toySeriesRoute.post('/updateToy/:id',(req,res) => {
         toySeries.findOne({_id:req.params.id}, (err ,toy) =>{
