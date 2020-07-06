@@ -36,6 +36,7 @@ class ViewToys extends Component{
             .then((res)=>{
                 axios.get('http://localhost:5000/toyCollection/series/'+this.props.match.params.id)
                 .then((res)=>{
+                    alert(`Toy deleted from ${this.props.match.params.title} collection`)
                     this.setState({
                         toys:res.data.Toys
                     })

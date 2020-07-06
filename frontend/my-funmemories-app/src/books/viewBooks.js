@@ -35,6 +35,7 @@ class ViewBooks extends Component{
             .then((res)=>{
                 axios.get('http://localhost:5000/bookCollection/series/'+this.props.match.params.id)
                 .then((res)=>{
+                    alert(`Book deleted from ${this.props.match.params.title} collection`)
                     this.setState({
                         books:res.data.Books
                     })

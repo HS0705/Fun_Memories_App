@@ -61,7 +61,7 @@ class AddBookSeries extends Component{
         }
         axios.post('http://localhost:5000/bookSeries/addBook', newBook) 
         .then ((res) => {
-            alert("Book added to the collection!")
+            alert(`Book added to the ${this.props.match.params.title} collection series!`)
             this.props.history.push('/landing')
         })
         .catch((err) =>{

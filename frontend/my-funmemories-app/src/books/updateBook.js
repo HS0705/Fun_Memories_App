@@ -71,6 +71,7 @@ class UpdateBook extends Component{
         }
         axios.post('http://localhost:5000/bookSeries/updateBook/'+this.props.match.params.id, updatedBook) 
         .then ((res) => {
+            alert(`${this.state.title}, updated`)
             this.props.history.push('/landing/')
         })
         .catch((err) =>{

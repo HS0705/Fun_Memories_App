@@ -68,7 +68,8 @@ class UpdateToy extends Component{
         }
         axios.post('http://localhost:5000/toySeries/updateToy/'+this.props.match.params.id, updatedToy) 
         .then ((res) => {
-            this.props.history.push('/viewToys/'+this.state.collectionId)
+            alert(`${this.state.title}, updated`  )
+            this.props.history.push('/landing')
         })
         .catch((err) =>{
             if(err.response){

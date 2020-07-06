@@ -56,7 +56,7 @@ class AddToySeries extends Component{
         }
         axios.post('http://localhost:5000/toySeries/addToy', newToy) 
         .then ((res) => {
-            alert("Toy added to the collection!")
+            alert(`Toy added to the ${this.props.match.params.title}!`)
             this.props.history.push('/landing');
         })
         .catch((err) =>{
