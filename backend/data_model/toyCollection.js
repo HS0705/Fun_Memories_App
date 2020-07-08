@@ -27,6 +27,9 @@ let toyCollectionSchema = new Schema({
     },
     addedDate:{
         type:Date
+    },
+    modifiedDate:{
+        type:Date
     }
 })
 

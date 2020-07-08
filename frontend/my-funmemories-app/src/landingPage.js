@@ -46,8 +46,14 @@ class LandingPage extends Component{
     showAddBookCollectionButton(id){
         this.props.history.push('/addBookCollection/'+id)
     }
+    showEditBookCollectionButton(id){
+        this.props.history.push('/updateBookCollection/'+id)
+    }
     showAddToyCollectionButton(id){
         this.props.history.push('/addToyCollection/'+id)
+    }
+    showEditToyCollectionButton(id){
+        this.props.history.push('/updateToyCollection/'+id)
     }
     showViewBooksButton(data){
         this.props.history.push('/viewBooks/'+data.id+'/'+data.title+'/'+data.category)
@@ -107,7 +113,10 @@ class LandingPage extends Component{
                                 </Card.Body>
                                 <Card.Footer style={{display:"flex", justifyContent:"space-between"}}>
                                     <Button className="btn-1" onClick={()=>this.showViewBooksButton({id:item._id,title:item.title,category:item.category})}>
-                                        ViewCollection
+                                        View
+                                    </Button>
+                                    <Button className="btn-1" onClick={()=>this.showEditBookCollectionButton(item._id)}>
+                                        Edit
                                     </Button>
                                     <Button className="btn-1" onClick={()=>this.showAddBookButton({id:item._id,title:item.title,category:item.category}) }>
                                         AddBook
@@ -166,7 +175,10 @@ class LandingPage extends Component{
                                 </Card.Body>
                                 <Card.Footer style={{display:"flex", justifyContent:"space-between"}}>
                                     <Button className="btn-1" onClick={()=>this.showViewToysButton({id:item._id,title:item.title,category:item.category})}>
-                                        ViewCollection
+                                        View
+                                    </Button>
+                                    <Button className="btn-1" onClick={()=>this.showEditToyCollectionButton(item._id)}>
+                                        Edit
                                     </Button>
                                     <Button className="btn-1" onClick={()=>this.showAddToyButton({id:item._id,title:item.title,category:item.category})}>
                                         AddToy

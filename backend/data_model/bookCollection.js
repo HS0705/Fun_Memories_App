@@ -27,6 +27,9 @@ let bookCollectionSchema = new Schema({
     },
     addedDate:{
         type:Date
+    },
+    modifiedDate:{
+        type:Date
     }
 })
 

@@ -173,6 +173,43 @@ userRoute.post('/register', ( req,res ) =>{
     })
 
     //get specific book collection 
+    bookCollectionRoute.get('/collection/:id',(req, res)=> {
+        bookCollection.find({_id:req.params.id})
+        .then((collection) =>{
+            res.status(200).json({'Collection': collection}); 
+        })
+        .catch(err =>{
+            res.send("Error" + err)
+        })   
+    })
+    bookCollectionRoute.post('/updateBookCollection/:id',(req,res) => {
+        bookCollection.findOne({_id:req.params.id}, (err ,collection) =>{
+            if(!collection){
+                res.json("Collection not found")
+            }
+            else{
+                 bookCollection.updateOne({_id:req.params.id},
+                    { $set:{
+                        title:req.body.title.toLowerCase(),
+                        description:req.body.description.toLowerCase(),
+                        author:req.body.author.toLowerCase(),
+                        category:req.body.category.toLowerCase(),
+                        image:req.body.image,
+                        comments:req.body.comments.toLowerCase(),
+                        modifiedDate: new Date()
+                    }
+                    })
+                    .then((Collection)=>{
+                        res.status(200).json("Successfully Updated the Collection");
+                    })
+                    .catch((err)=>{
+                        res.send(err)
+                    })
+                    
+                }
+            })                                        
+        })  
+    //get all books for the specific collection
     bookCollectionRoute.get('/series/:id',(req, res)=> {
         bookSeries.find({collectionId:req.params.id})
         .then((books) =>{
@@ -182,7 +219,6 @@ userRoute.post('/register', ( req,res ) =>{
             res.send("Error" + err)
         })   
     })
-    
     //add book to the specific book collection
     bookSeriesRoute.post('/addBook',(req, res)=> {
         bookCollection.findOne({_id:req.body.collectionId})
@@ -211,6 +247,7 @@ userRoute.post('/register', ( req,res ) =>{
             res.send("Error" + err)
         })        
     }) 
+
     //Get specific book
     bookSeriesRoute.get('/book/:id',(req, res)=> {
         bookSeries.findOne({_id:req.params.id},(err,book) =>{
@@ -303,7 +340,47 @@ userRoute.post('/register', ( req,res ) =>{
         res.send("Error" + err)
         }) 
     })
-    //get specific toy collection 
+
+    //get Toy Collection
+    toyCollectionRoute.get('/collection/:id',(req, res)=> {
+        toyCollection.find({_id:req.params.id})
+        .then((collection) =>{
+            res.status(200).json({'Collection': collection}); 
+        })
+        .catch(err =>{
+            res.send("Error" + err)
+        })   
+    })
+    //Update specific Toy Collection
+    toyCollectionRoute.post('/updateToyCollection/:id',(req,res) => {
+        toyCollection.findOne({_id:req.params.id}, (err ,collection) =>{
+            if(!collection){
+                res.json("Collection not found")
+            }
+            else{
+                 toyCollection.updateOne({_id:req.params.id},
+                    { $set:{
+                        title:req.body.title.toLowerCase(),
+                        description:req.body.description.toLowerCase(),
+                        brand:req.body.brand.toLowerCase(),
+                        category:req.body.category.toLowerCase(),
+                        image:req.body.image,
+                        comments:req.body.comments.toLowerCase(),
+                        modifiedDate: new Date()
+                    }
+                    })
+                    .then((Collection)=>{
+                        res.status(200).json("Successfully Updated the Collection");
+                    })
+                    .catch((err)=>{
+                        res.send(err)
+                    })
+                    
+                }
+            })                                        
+        })
+
+    //get all toys for a specific toy collection 
     toyCollectionRoute.get('/series/:id',(req, res)=> {
         toySeries.find({collectionId:req.params.id})
         .then((toys) =>{
