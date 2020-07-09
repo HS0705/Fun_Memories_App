@@ -1,3 +1,11 @@
-#### `Fun-Memrories App`
+### `Fun-Memrories App`
 
-This application is build using Node, Express, React, React-bootstrap, CSS. MongoDB is the database and the password encryption algorithm used is Bcrypt and Json Web Token.
+##### `ABOUT`
+*The application allows kids to store the details about their favorite books and toys with the ability to save the image of their book or toy*
+
+##### `TECHNOLOGY`
+*This application is build using*  **Node, Express, React, React-bootstrap, CSS**. **MongoDB** is the database and the password encryption algorithm used is **Bcrypt** and **Json Web Token**
+
+##### `DEMO`
+<img src="demo/demo.gif" />
+
