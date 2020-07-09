@@ -1,7 +1,6 @@
 import React,{Component} from 'react';
 import axios from 'axios';
 import {Form} from 'react-bootstrap';
-import DatePicker from 'react-datepicker';
 
 class UpdateBook extends Component{
     constructor(props){

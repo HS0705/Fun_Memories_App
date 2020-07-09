@@ -103,7 +103,7 @@ class UpdateBookCollection extends Component{
                 </Form.Group>
                 <Form.Group controlId="categoryId">
                     <Form.Label>Category</Form.Label><br />
-                    <input readOnlytype="text" value={this.state.category} />
+                    <input type="text" defaultValue={this.state.category} />
                     <Form.Control as="select" name="category" onChange={this.onChange}>
                         <option>Select</option>
                         <option>Fiction</option>
