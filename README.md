@@ -5,8 +5,8 @@ The application allows kids to remember the details about their favorite book se
 
 ## Technology
 * The application has two folders, a README.md file and a demo
-    * backend/
-    * frontend/
+    * backend/ (Server)
+    * frontend/ (Client)
 * The application is build using  **Node, Express, React, React-bootstrap,React-router-dom, JavaScript,HTML, CSS**. 
 * **MongoDB** is the database and the password encryption algorithm used is **Bcrypt** and **JSON web token** for authentication.
 
