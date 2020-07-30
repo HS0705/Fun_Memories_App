@@ -470,7 +470,7 @@ userRoute.post('/register', ( req,res ) =>{
                 })                                        
             })  
     
-
+// Testing
 app.get('/', (req,res)=>{
     res.send("Hello from server")
 });
