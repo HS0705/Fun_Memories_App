@@ -10,8 +10,8 @@ services:
         environment:
                 - SECRET_KEY
         depends_on:
-            - mongodb-db
-    mongodb-db:
+            - mongo
+    mongo:
         image: mongo
         volumes:
             - ./data:/data/db
