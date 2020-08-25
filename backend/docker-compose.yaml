@@ -7,9 +7,11 @@ services:
             dockerfile: Dockerfile.dev
         ports:
             - "5000:5000"
+        environment:
+                - SECRET_KEY
         depends_on:
-            - mongo
-    mongo:
+            - mongodb
+    mongodb:
         image: mongo
         volumes:
             - ./data:/data/db
