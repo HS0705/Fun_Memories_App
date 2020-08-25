@@ -37,7 +37,7 @@ app.use('/toyCollection', toyCollectionRoute);
 app.use('/toySeries',toySeriesRoute);
 
 //Establishing MongoDB connection
-mongoose.connect('mongodb://mongo:27017/funmemoriesdb', {  useNewUrlParser: true });
+mongoose.connect('mongodb://mongodb:27017/funmemoriesdb', {  useNewUrlParser: true });
 const dbConnection = mongoose.connection;
 dbConnection.once('open', () => {
     console.log("Mongodb started!")
