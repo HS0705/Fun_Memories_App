@@ -38,7 +38,7 @@ app.use('/toySeries',toySeriesRoute);
 
 //Establishing MongoDB connection
 mongoose.connect('mongodb://mongo:27017/funmemoriesdb').then(() => {
-console.log("Connected to Database");
+    console.log("Connected to Database");
 }).catch((err) => {
     console.log("Not Connected to Database ERROR! ", err);
 });
