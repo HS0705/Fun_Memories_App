@@ -12,6 +12,6 @@ services:
         command: ["mongod", "-f", "/etc/mongod.conf"]
         volumes:
             - /usr/local/etc/mongod.conf: /etc/mongod.conf
-	        - /usr/local/var/mongodb: /data/db
+            - /usr/local/var/mongodb: /data/db
         ports:
             - "27017:27017"
