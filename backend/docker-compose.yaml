@@ -1,5 +1,5 @@
 version: '3'
-services: 
+services:
     web:
         build:
             context: .
@@ -10,9 +10,8 @@ services:
             - mongo
     mongo:
         image: mongo
-        command: ["mongod", "-f", "/etc/mongod.conf"]
         volumes:
-            - /usr/local/var/mongod.conf:/usr/local/var/mongod.conf
-            - /usr/local/var/mongodb:/data/db
+            - /usr/local/etc/mongod.conf:/etc/mongod.conf
+            - /usr/local/etc/.env:/app/.env
         ports:
             - "27017:27017"
